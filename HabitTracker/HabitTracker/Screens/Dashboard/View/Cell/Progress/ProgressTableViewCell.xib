@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="194" id="KGk-i7-Jjw" customClass="ProgressTableViewCell" customModule="HabitTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="194"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="194"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDU-Us-wbt">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="188"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-progress" translatesAutoresizingMaskIntoConstraints="NO" id="ZYN-CI-XUt">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="188"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-Jq-ah3">
+                                <rect key="frame" x="25" y="35.666666666666657" width="117" height="117"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="117" id="CA2-8T-tLG"/>
+                                    <constraint firstAttribute="width" constant="117" id="Kva-cE-jGZ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 of 5 habits completed today!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFV-Ym-c10">
+                                <rect key="frame" x="167" y="70" width="158" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="Tif-ww-zm5">
+                                <rect key="frame" x="228" y="144" width="116" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Oxb-Ns-JCU"/>
+                                    <constraint firstAttribute="width" constant="116" id="bM5-Z2-Xf9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xhs-Jq-ah3" firstAttribute="centerY" secondItem="ZYN-CI-XUt" secondAttribute="centerY" id="2xC-J4-e85"/>
+                            <constraint firstItem="ZYN-CI-XUt" firstAttribute="leading" secondItem="VDU-Us-wbt" secondAttribute="leading" id="7SF-UN-OGA"/>
+                            <constraint firstItem="dFV-Ym-c10" firstAttribute="leading" secondItem="xhs-Jq-ah3" secondAttribute="trailing" constant="25" id="Gf9-l4-B0S"/>
+                            <constraint firstAttribute="trailing" secondItem="Tif-ww-zm5" secondAttribute="trailing" constant="6" id="IiU-zF-PiR"/>
+                            <constraint firstItem="xhs-Jq-ah3" firstAttribute="leading" secondItem="VDU-Us-wbt" secondAttribute="leading" constant="25" id="PnV-ni-s4O"/>
+                            <constraint firstItem="ZYN-CI-XUt" firstAttribute="top" secondItem="VDU-Us-wbt" secondAttribute="top" id="Rsb-fH-2Lh"/>
+                            <constraint firstAttribute="bottom" secondItem="ZYN-CI-XUt" secondAttribute="bottom" id="aag-M9-2ij"/>
+                            <constraint firstAttribute="trailing" secondItem="ZYN-CI-XUt" secondAttribute="trailing" id="jjZ-aL-tlr"/>
+                            <constraint firstAttribute="trailing" secondItem="dFV-Ym-c10" secondAttribute="trailing" constant="25" id="psn-DG-yL5"/>
+                            <constraint firstItem="dFV-Ym-c10" firstAttribute="centerY" secondItem="xhs-Jq-ah3" secondAttribute="centerY" id="wDR-C4-Giw"/>
+                            <constraint firstAttribute="bottom" secondItem="Tif-ww-zm5" secondAttribute="bottom" constant="-6" id="yOX-cK-ezm"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="VDU-Us-wbt" secondAttribute="trailing" id="T8N-s1-hmZ"/>
+                    <constraint firstItem="VDU-Us-wbt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UAL-cJ-cq2"/>
+                    <constraint firstAttribute="bottom" secondItem="VDU-Us-wbt" secondAttribute="bottom" constant="6" id="fsI-ZV-A7J"/>
+                    <constraint firstItem="VDU-Us-wbt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xN5-d2-tdA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="143.5114503816794" y="75.352112676056336"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="background-progress" width="350.66665649414062" height="189"/>
+        <image name="calender" width="116.33333587646484" height="51"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
