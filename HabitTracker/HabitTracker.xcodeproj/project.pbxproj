@@ -65,15 +65,11 @@
 		};
 		4D0C08AB2D456EBD0023D80C /* HabitTrackerTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = HabitTrackerTests;
 			sourceTree = "<group>";
 		};
 		4D0C08B52D456EBD0023D80C /* HabitTrackerUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = HabitTrackerUITests;
 			sourceTree = "<group>";
 		};
@@ -149,7 +145,6 @@
 				8F7B5D1811462A99E1EBDCEE /* Pods-HabitTrackerTests.debug.xcconfig */,
 				2FF02BAF4D1583DC494DEBB2 /* Pods-HabitTrackerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
