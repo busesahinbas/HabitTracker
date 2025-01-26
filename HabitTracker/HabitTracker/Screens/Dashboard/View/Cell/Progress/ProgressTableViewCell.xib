@@ -26,7 +26,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-Jq-ah3">
                                 <rect key="frame" x="25" y="35.666666666666657" width="117" height="117"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="117" id="CA2-8T-tLG"/>
                                     <constraint firstAttribute="width" constant="117" id="Kva-cE-jGZ"/>
@@ -70,6 +70,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="ZYN-CI-XUt" id="BgN-L8-Jr1"/>
+                <outlet property="progressView" destination="xhs-Jq-ah3" id="edv-ac-jcV"/>
+            </connections>
             <point key="canvasLocation" x="143.5114503816794" y="75.352112676056336"/>
         </tableViewCell>
     </objects>

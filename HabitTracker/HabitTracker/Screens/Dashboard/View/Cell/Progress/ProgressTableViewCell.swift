@@ -8,11 +8,21 @@
 
 import UIKit
 
-class ProgressTableViewCell: UITableViewCell {
-
+final class ProgressTableViewCell: UITableViewCell {
+    @IBOutlet private(set) weak var backgroundImageView: UIImageView!
+    @IBOutlet private(set) weak var progressView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setup()
+    }
+    
+    private func setup() {
+        backgroundImageView.layer.cornerRadius = 7
+        
+        let circularProgress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 117, height: 117))
+        circularProgress.progress = 70
+        progressView.addSubview(circularProgress) // ✅ Doğru kullanım
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
