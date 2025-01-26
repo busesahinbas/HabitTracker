@@ -22,12 +22,13 @@ final class DashboardViewController: UIViewController {
 
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "UserTableViewCell")
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: "ProgressTableViewCell")
+        tableView.register(UINib(nibName: "TodayTableViewCell", bundle: nil), forCellReuseIdentifier: "TodayTableViewCell")
     }
 }
 
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,13 +38,17 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             return cell
-
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableViewCell", for: indexPath) as? ProgressTableViewCell else {
                 return UITableViewCell()
             }
             return cell
-
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as? TodayTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            return cell
         default:
             return UITableViewCell()
         }
