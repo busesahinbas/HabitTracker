@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="350" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="c7T-Qh-jDj">
-                        <rect key="frame" x="0.0" y="6" width="172" height="53"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="c7T-Qh-jDj">
+                        <rect key="frame" x="0.0" y="16" width="172" height="33"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun, 1 March 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVU-Mi-Agm">
                                 <rect key="frame" x="0.0" y="0.0" width="135.33333333333334" height="19.333333333333332"/>
@@ -26,8 +26,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Susy!👋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpC-97-NZP">
-                                <rect key="frame" x="0.0" y="19.333333333333332" width="172" height="33.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Hello, Susy!👋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpC-97-NZP">
+                                <rect key="frame" x="0.0" y="24.333333333333336" width="172" height="8.6666666666666643"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,8 +36,9 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="c7T-Qh-jDj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8RV-Vw-HGH"/>
                     <constraint firstItem="c7T-Qh-jDj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FRE-rI-ESf"/>
+                    <constraint firstItem="c7T-Qh-jDj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="WEX-qt-Kfm"/>
+                    <constraint firstAttribute="bottom" secondItem="c7T-Qh-jDj" secondAttribute="bottom" constant="16" id="oL1-QK-3kr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
