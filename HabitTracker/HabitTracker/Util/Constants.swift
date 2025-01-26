@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+struct Habit {
+    let name: String
+    var isCompleted: Bool
+}
+
+private var habits: [Habit] = [
+    Habit(name: "Meditating", isCompleted: true),
+    Habit(name: "Read Philosophy", isCompleted: true),
+    Habit(name: "Journaling", isCompleted: false)
+]
