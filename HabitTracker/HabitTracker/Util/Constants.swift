@@ -13,7 +13,7 @@ struct Habit {
     var isCompleted: Bool
 }
 
-private var habits: [Habit] = [
+var habits: [Habit] = [
     Habit(name: "Meditating", isCompleted: true),
     Habit(name: "Read Philosophy", isCompleted: true),
     Habit(name: "Journaling", isCompleted: false)

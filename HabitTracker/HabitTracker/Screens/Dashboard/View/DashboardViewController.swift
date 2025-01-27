@@ -48,9 +48,17 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             return cell
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension DashboardViewController: TodayTableViewCellDelegate {
+    func didUpdateTableViewHeight() {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }

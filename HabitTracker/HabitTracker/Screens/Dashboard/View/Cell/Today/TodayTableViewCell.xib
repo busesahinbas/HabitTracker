@@ -14,24 +14,28 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="262" id="KGk-i7-Jjw" customClass="TodayTableViewCell" customModule="HabitTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today Habit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0q-MD-XV7">
-                        <rect key="frame" x="0.0" y="16" width="118" height="164"/>
+                        <rect key="frame" x="0.0" y="16" width="118" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="NwS-Ni-JMa"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UiZ-Ms-MRh">
-                        <rect key="frame" x="0.0" y="188" width="350" height="58"/>
+                        <rect key="frame" x="0.0" y="53" width="350" height="58"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="58" id="yzg-Tj-Pj1"/>
                         </constraints>
                     </tableView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="UiZ-Ms-MRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GFe-kP-Egv"/>
                     <constraint firstItem="p0q-MD-XV7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="UUb-9V-DTV"/>

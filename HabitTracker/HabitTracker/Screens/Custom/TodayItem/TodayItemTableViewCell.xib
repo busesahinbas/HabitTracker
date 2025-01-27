@@ -35,6 +35,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="checkmarkButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kRn-20-17y"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-scroll" translatesAutoresizingMaskIntoConstraints="NO" id="FZb-No-2RN">
                                 <rect key="frame" x="298" y="20" width="18" height="18"/>
