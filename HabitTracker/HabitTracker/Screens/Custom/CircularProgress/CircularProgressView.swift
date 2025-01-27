@@ -9,16 +9,19 @@
 import UIKit
 
 final class CircularProgressView: UIView {
+    //MARK: - IBOutlets
     private var progressLayer = CAShapeLayer()
     private var trackLayer = CAShapeLayer()
     private var progressLabel = UILabel()
 
+    //MARK: - Properties
     var progress: CGFloat = 0 {
         didSet {
             setProgress(value: progress)
         }
     }
 
+    //MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -28,15 +31,33 @@ final class CircularProgressView: UIView {
         super.init(coder: coder)
         setupView()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupView()
+    }
 
+    //MARK: - Setup Configuration
     private func setupView() {
+        layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        subviews.forEach { $0.removeFromSuperview() }
+        
         createTrackLayer()
         createProgressLayer()
         createLabel()
+        setupProgress()
+    }
+    
+    private func setupProgress() {
+        let completedCount = habits.filter { $0.isCompleted }.count
+        let totalCount = habits.count
+        let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
+        
+        setProgress(value: progress)
     }
 
     private func createTrackLayer() {
-        let circularPath = UIBezierPath(arcCenter: center,
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
                                         radius: bounds.width / 2,
                                         startAngle: -(.pi / 2),
                                         endAngle: 1.5 * .pi,
@@ -52,7 +73,7 @@ final class CircularProgressView: UIView {
     }
 
     private func createProgressLayer() {
-        let circularPath = UIBezierPath(arcCenter: center,
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
                                         radius: bounds.width / 2,
                                         startAngle: -(.pi / 2),
                                         endAngle: 1.5 * .pi,
@@ -76,20 +97,17 @@ final class CircularProgressView: UIView {
         addSubview(progressLabel)
     }
 
-    private func setProgress(value: CGFloat) {
-        progressLayer.strokeEnd = value / 100
-        progressLabel.text = "\(Int(value))%"
+    func setProgress(value: CGFloat) {
+        let newValue = max(0, min(100, value))
+        
+        progressLayer.strokeEnd = newValue / 100
+        progressLabel.text = "\(Int(newValue))%"
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = value / 100
+        animation.toValue = newValue / 100
         animation.duration = 0.5
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
         progressLayer.add(animation, forKey: "progressAnim")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupView()
     }
 }

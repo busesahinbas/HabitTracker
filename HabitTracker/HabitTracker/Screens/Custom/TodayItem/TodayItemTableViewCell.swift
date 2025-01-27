@@ -21,7 +21,7 @@ class TodayItemTableViewCell: UITableViewCell {
     //MARK: - Properties
     weak var delegate: TodayItemTableViewCellDelegate?
     private var habit: Habit?
-
+    
     //MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +34,7 @@ class TodayItemTableViewCell: UITableViewCell {
         containerView.layer.masksToBounds = true
     }
     
+    //MARK: - Public Methods
     func configure(habit: Habit?) {
         guard let habit = habit else { return }
         self.habit = habit
@@ -41,6 +42,7 @@ class TodayItemTableViewCell: UITableViewCell {
         habitLabel.text = habit.name
     }
     
+    //MARK: - Private Methods
     private func configureColor(isCompleted: Bool) {
         if isCompleted {
             containerView.backgroundColor = UIColor.green.withAlphaComponent(0.2)
@@ -53,11 +55,13 @@ class TodayItemTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: - Actions
     @IBAction func checkmarkButtonTapped(_ sender: Any) {
         guard var habit = habit else { return }
         
         habit.isCompleted.toggle()
         self.habit = habit
+        
         configureColor(isCompleted: habit.isCompleted)
         
         delegate?.didToggleHabitCompletion(for: self)

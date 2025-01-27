@@ -10,6 +10,7 @@ import UIKit
 
 protocol TodayTableViewCellDelegate: AnyObject {
     func didUpdateTableViewHeight()
+    func didTableViewCellDelete()
 }
 
 final class TodayTableViewCell: UITableViewCell {
@@ -70,11 +71,15 @@ extension TodayTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
             habits.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
             self.updateTableViewHeight()
+            self.updateProgress()
+            self.delegate?.didTableViewCellDelete()
+            
             completionHandler(true)
         }
         deleteAction.backgroundColor = .red
-        
+
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
@@ -83,8 +88,19 @@ extension TodayTableViewCell: UITableViewDelegate, UITableViewDataSource {
 extension TodayTableViewCell: TodayItemTableViewCellDelegate {
     func didToggleHabitCompletion(for cell: TodayItemTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
+        
         habits[indexPath.row].isCompleted.toggle()
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        updateProgress()
+    }
+    
+    private func updateProgress() {
+        let completedCount = habits.filter { $0.isCompleted }.count
+        let totalCount = habits.count
+        let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
+        
+        NotificationCenter.default.post(name: NSNotification.Name("UpdateProgress"), object: progress)
     }
 }

@@ -9,26 +9,40 @@
 import UIKit
 
 final class ProgressTableViewCell: UITableViewCell {
+    //MARK: - IBOutlets
     @IBOutlet private(set) weak var backgroundImageView: UIImageView!
     @IBOutlet private(set) weak var progressView: UIView!
+    @IBOutlet private(set) weak var descriptionLabel: UILabel!
     
+    //MARK: - Properties
+    private var circularProgress: CircularProgressView?
+    
+    //MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
     
+    //MARK: - Setup Configuration
     private func setup() {
         backgroundImageView.layer.cornerRadius = 7
         
-        let circularProgress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 117, height: 117))
-        circularProgress.progress = 70
-        progressView.addSubview(circularProgress) // ✅ Doğru kullanım
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        circularProgress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 117, height: 117))
+        if let circularProgress = circularProgress {
+            progressView.addSubview(circularProgress)
+        }
+        setupLabel()
     }
     
+    func configure(progress: CGFloat) {
+        circularProgress?.setProgress(value: progress)
+        setupLabel()
+    }
+    
+    private func setupLabel() {
+        let completedCount = habits.filter { $0.isCompleted }.count
+        let totalCount = habits.count
+        
+        descriptionLabel.text = "\(completedCount) of \(totalCount) habits completed today!"
+    }
 }

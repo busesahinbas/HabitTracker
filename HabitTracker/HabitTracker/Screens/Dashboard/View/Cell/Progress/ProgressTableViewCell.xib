@@ -72,6 +72,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="backgroundImageView" destination="ZYN-CI-XUt" id="BgN-L8-Jr1"/>
+                <outlet property="descriptionLabel" destination="dFV-Ym-c10" id="en6-gr-oBY"/>
                 <outlet property="progressView" destination="xhs-Jq-ah3" id="edv-ac-jcV"/>
             </connections>
             <point key="canvasLocation" x="143.5114503816794" y="75.352112676056336"/>
