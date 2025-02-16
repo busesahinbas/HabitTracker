@@ -34,9 +34,19 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IyF-pR-JCt">
+                        <rect key="frame" x="300.33333333333331" y="15.333333333333332" width="49.666666666666686" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="plus.circle.fill" catalog="system"/>
+                        <connections>
+                            <action selector="addButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yKl-cV-Ani"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="c7T-Qh-jDj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FRE-rI-ESf"/>
+                    <constraint firstAttribute="trailing" secondItem="IyF-pR-JCt" secondAttribute="trailing" id="FU6-hL-hyV"/>
+                    <constraint firstItem="IyF-pR-JCt" firstAttribute="centerY" secondItem="c7T-Qh-jDj" secondAttribute="centerY" id="MQF-jU-lE4"/>
                     <constraint firstItem="c7T-Qh-jDj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="WEX-qt-Kfm"/>
                     <constraint firstAttribute="bottom" secondItem="c7T-Qh-jDj" secondAttribute="bottom" constant="16" id="oL1-QK-3kr"/>
                 </constraints>
@@ -45,4 +55,7 @@
             <point key="canvasLocation" x="71.755725190839698" y="27.112676056338028"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
+    </resources>
 </document>

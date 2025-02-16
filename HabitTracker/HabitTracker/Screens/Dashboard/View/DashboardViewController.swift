@@ -56,6 +56,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell", for: indexPath) as? UserTableViewCell else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableViewCell", for: indexPath) as? ProgressTableViewCell else {
@@ -92,5 +93,14 @@ extension DashboardViewController: TodayTableViewCellDelegate {
         let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
         
         progressCell?.configure(progress: progress)
+    }
+}
+
+// MARK: - UserTableViewCellDelegate
+extension DashboardViewController: UserTableViewCellDelegate {
+    func didTapAddButton() {
+        let createVC = CreateViewController()
+        let navController = UINavigationController(rootViewController: createVC)
+        present(navController, animated: true)
     }
 }

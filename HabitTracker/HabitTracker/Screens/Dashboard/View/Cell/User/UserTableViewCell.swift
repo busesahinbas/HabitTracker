@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol UserTableViewCellDelegate: AnyObject {
+    func didTapAddButton()
+}
+
 class UserTableViewCell: UITableViewCell {
+    // MARK: - Properties
+    weak var delegate: UserTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,4 +27,8 @@ class UserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        delegate?.didTapAddButton()
+    }
 }
