@@ -11,12 +11,14 @@ import UIKit
 protocol TodayTableViewCellDelegate: AnyObject {
     func didUpdateTableViewHeight()
     func didTableViewCellDelete()
+    func didTapShowAllButton()
 }
 
 final class TodayTableViewCell: UITableViewCell {
     //MARK: - IBOutlets
     @IBOutlet private(set) weak var tableView: UITableView!
-    @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var descriptionLabel: UILabel!
     
     //MARK: - Properties
     weak var delegate: TodayTableViewCellDelegate?
@@ -25,6 +27,9 @@ final class TodayTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTableView()
+        
+        self.roundCorners()
+        self.addShadow()
     }
     
     //MARK: - Setup Configuration
@@ -45,10 +50,35 @@ final class TodayTableViewCell: UITableViewCell {
         tableViewHeightConstraint.constant = CGFloat(shownCellsCount) * rowHeight
         
         UIView.animate(withDuration: 0.3) {
-            self.tableView.reloadData()
+            self.layoutIfNeeded()
         }
         
         delegate?.didUpdateTableViewHeight()
+    }
+    
+    private func showEmptyState(show: Bool) {
+        if show {
+            descriptionLabel.text = "No habits yet! 🌱\nTap + to create your first habit"
+            descriptionLabel.isHidden = false
+            tableView.isHidden = true
+        } else {
+            descriptionLabel.isHidden = true
+            tableView.isHidden = false
+        }
+    }
+    
+    func configure(with habits: [Habit]) {
+        if habits.count > 0 {
+            showEmptyState(show: false)
+            updateTableViewHeight()
+            tableView.reloadData()
+        } else {
+            showEmptyState(show: true)
+        }
+    }
+    
+    @IBAction func allButtonTapped(_ sender: Any) {
+        delegate?.didTapShowAllButton()
     }
 }
 
@@ -68,13 +98,13 @@ extension TodayTableViewCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             habits.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            self.updateTableViewHeight()
-            self.updateProgress()
-            self.delegate?.didTableViewCellDelete()
+            self?.updateTableViewHeight()
+            self?.updateProgress()
+            self?.delegate?.didTableViewCellDelete()
             
             completionHandler(true)
         }
@@ -89,7 +119,7 @@ extension TodayTableViewCell: TodayItemTableViewCellDelegate {
     func didToggleHabitCompletion(for cell: TodayItemTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
-        habits[indexPath.row].isCompleted.toggle()
+        habits[indexPath.row].toggleCompletion()
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
         

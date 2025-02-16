@@ -25,7 +25,9 @@ final class ProgressTableViewCell: UITableViewCell {
     
     //MARK: - Setup Configuration
     private func setup() {
-        backgroundImageView.layer.cornerRadius = 7
+        backgroundImageView.layer.cornerRadius = 6
+        backgroundImageView.roundCorners()
+        backgroundImageView.addShadow()
         
         circularProgress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 117, height: 117))
         if let circularProgress = circularProgress {

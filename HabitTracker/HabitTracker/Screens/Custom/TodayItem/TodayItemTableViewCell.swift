@@ -30,8 +30,10 @@ class TodayItemTableViewCell: UITableViewCell {
     
     //MARK: - UI Configuration
     private func setupUI() {
-        containerView.layer.cornerRadius = 6
-        containerView.layer.masksToBounds = true
+        containerView.roundCorners()
+        containerView.layer.borderWidth = 0.2
+        containerView.layer.borderColor = UIColor.systemGray6.cgColor
+   
     }
     
     //MARK: - Public Methods
@@ -49,7 +51,7 @@ class TodayItemTableViewCell: UITableViewCell {
             checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             checkmarkButton.tintColor = .green
         } else {
-            containerView.backgroundColor = .white
+            containerView.backgroundColor = .systemGray6
             checkmarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
             checkmarkButton.tintColor = .black
         }

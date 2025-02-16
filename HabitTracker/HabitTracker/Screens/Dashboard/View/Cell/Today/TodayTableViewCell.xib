@@ -14,12 +14,12 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="262" id="KGk-i7-Jjw" customClass="TodayTableViewCell" customModule="HabitTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today Habit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0q-MD-XV7">
-                        <rect key="frame" x="0.0" y="16" width="118" height="29"/>
+                        <rect key="frame" x="8" y="16" width="118" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="29" id="NwS-Ni-JMa"/>
                         </constraints>
@@ -28,25 +28,49 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UiZ-Ms-MRh">
-                        <rect key="frame" x="0.0" y="53" width="350" height="58"/>
+                        <rect key="frame" x="8" y="53" width="334" height="58"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="58" id="yzg-Tj-Pj1"/>
                         </constraints>
                     </tableView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTz-7b-O8Z">
+                        <rect key="frame" x="268" y="13" width="74" height="35"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="See all"/>
+                        <connections>
+                            <action selector="allButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ANr-zY-LTB"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No habits yet! 🌱Tap + to create your first habit" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvG-cG-FYS">
+                        <rect key="frame" x="36" y="61" width="278" height="40.666666666666657"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dtg-S5-JJU"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="UiZ-Ms-MRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GFe-kP-Egv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="PvG-cG-FYS" secondAttribute="trailing" constant="16" id="0Go-I6-ZeZ"/>
+                    <constraint firstItem="UiZ-Ms-MRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GFe-kP-Egv"/>
+                    <constraint firstItem="PvG-cG-FYS" firstAttribute="top" secondItem="p0q-MD-XV7" secondAttribute="bottom" constant="16" id="Nvr-FI-tDx"/>
                     <constraint firstItem="p0q-MD-XV7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="UUb-9V-DTV"/>
                     <constraint firstAttribute="bottom" secondItem="UiZ-Ms-MRh" secondAttribute="bottom" constant="16" id="Z9i-qL-PU3"/>
                     <constraint firstItem="UiZ-Ms-MRh" firstAttribute="top" secondItem="p0q-MD-XV7" secondAttribute="bottom" constant="8" id="bsw-Vv-CIM"/>
-                    <constraint firstAttribute="trailing" secondItem="UiZ-Ms-MRh" secondAttribute="trailing" id="eMD-wA-aTD"/>
-                    <constraint firstItem="p0q-MD-XV7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vFx-fQ-ygT"/>
+                    <constraint firstAttribute="trailing" secondItem="UiZ-Ms-MRh" secondAttribute="trailing" constant="8" id="eMD-wA-aTD"/>
+                    <constraint firstAttribute="bottom" secondItem="PvG-cG-FYS" secondAttribute="bottom" constant="16" id="f0t-DW-i1O"/>
+                    <constraint firstItem="PvG-cG-FYS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="hDX-rw-O4p"/>
+                    <constraint firstItem="ZTz-7b-O8Z" firstAttribute="centerY" secondItem="p0q-MD-XV7" secondAttribute="centerY" id="mK2-yJ-asd"/>
+                    <constraint firstAttribute="trailing" secondItem="ZTz-7b-O8Z" secondAttribute="trailing" constant="8" id="tGV-Uo-aGX"/>
+                    <constraint firstItem="p0q-MD-XV7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="vFx-fQ-ygT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionLabel" destination="PvG-cG-FYS" id="EJq-AY-aIo"/>
                 <outlet property="tableView" destination="UiZ-Ms-MRh" id="8K3-h4-wHJ"/>
                 <outlet property="tableViewHeightConstraint" destination="yzg-Tj-Pj1" id="Fpl-z4-Rgo"/>
             </connections>
