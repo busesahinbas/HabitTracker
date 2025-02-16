@@ -11,7 +11,7 @@ import UIKit
 
 extension UIView {
     /// Rounds the corners of the view with a given radius.
-    func roundCorners(radius: CGFloat = 6) {
+    func roundCorners(radius: CGFloat = 10) {
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = false // allow shadow to be visible
     }
@@ -20,7 +20,7 @@ extension UIView {
     func addShadow(color: UIColor = .black,
                    offset: CGSize = CGSize(width: 0, height: 2),
                    opacity: Float = 0.2,
-                   radius: CGFloat = 6) {
+                   radius: CGFloat = 10) {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOffset = offset
         self.layer.shadowOpacity = opacity

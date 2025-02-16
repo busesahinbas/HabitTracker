@@ -27,7 +27,7 @@ final class DashboardViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Setup Configuration
+    // MARK: - Configuration
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -35,6 +35,8 @@ final class DashboardViewController: UIViewController {
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "UserTableViewCell")
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: "ProgressTableViewCell")
         tableView.register(UINib(nibName: "TodayTableViewCell", bundle: nil), forCellReuseIdentifier: "TodayTableViewCell")
+        
+        tableView.layer.masksToBounds = false
     }
     
     @objc private func updateProgressView(_ notification: Notification) {
@@ -62,17 +64,24 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableViewCell", for: indexPath) as? ProgressTableViewCell else {
                 return UITableViewCell()
             }
-            self.progressCell = cell  // ProgressTableViewCell referansını sakla
+            self.progressCell = cell
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as? TodayTableViewCell else {
                 return UITableViewCell()
             }
             cell.delegate = self
+            cell.configure(with: habits)
             return cell
         default:
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.cornerRadius = 10
+        cell.contentView.layer.masksToBounds = true
+        cell.backgroundColor = .clear
     }
 }
 
@@ -94,13 +103,17 @@ extension DashboardViewController: TodayTableViewCellDelegate {
         
         progressCell?.configure(progress: progress)
     }
+    
+    func didTapShowAllButton() {
+        let showAllVC = ShowAllViewController()
+        navigationController?.pushViewController(showAllVC, animated: true)
+    }
 }
 
 // MARK: - UserTableViewCellDelegate
 extension DashboardViewController: UserTableViewCellDelegate {
     func didTapAddButton() {
         let createVC = CreateViewController()
-        let navController = UINavigationController(rootViewController: createVC)
-        present(navController, animated: true)
+        navigationController?.pushViewController(createVC, animated: true)
     }
 }

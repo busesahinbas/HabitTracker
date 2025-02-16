@@ -25,7 +25,7 @@ final class ProgressTableViewCell: UITableViewCell {
     
     //MARK: - Setup Configuration
     private func setup() {
-        backgroundImageView.layer.cornerRadius = 6
+        backgroundImageView.layer.cornerRadius = 10
         backgroundImageView.roundCorners()
         backgroundImageView.addShadow()
         
