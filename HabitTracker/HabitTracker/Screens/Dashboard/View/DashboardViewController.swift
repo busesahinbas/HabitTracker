@@ -23,6 +23,12 @@ final class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateProgressView(_:)), name: NSNotification.Name("UpdateProgress"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateProgress()
+        tableView.reloadData()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
