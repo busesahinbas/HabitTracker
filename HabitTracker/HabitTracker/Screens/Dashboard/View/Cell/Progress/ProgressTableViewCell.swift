@@ -42,6 +42,7 @@ final class ProgressTableViewCell: UITableViewCell {
     }
     
     private func setupLabel() {
+        let habits = HabitManager.shared.habits // UserDefaults'tan gelen alışkanlıklar
         let completedCount = habits.filter { $0.isCompleted }.count
         let totalCount = habits.count
         

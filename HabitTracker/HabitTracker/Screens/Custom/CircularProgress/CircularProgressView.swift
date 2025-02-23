@@ -49,8 +49,8 @@ final class CircularProgressView: UIView {
     }
     
     private func setupProgress() {
-        let completedCount = habits.filter { $0.isCompleted }.count
-        let totalCount = habits.count
+        let completedCount = HabitManager.shared.habits.filter { $0.isCompleted }.count
+        let totalCount = HabitManager.shared.habits.count
         let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
         
         setProgress(value: progress)

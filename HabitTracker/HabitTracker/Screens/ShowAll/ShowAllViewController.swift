@@ -93,8 +93,8 @@ final class ShowAllViewController: UIViewController {
     
     private func updateUI() {
         tableView.reloadData()
-        emptyView.isHidden = !habits.isEmpty
-        tableView.isHidden = habits.isEmpty
+        emptyView.isHidden = !HabitManager.shared.habits.isEmpty
+        tableView.isHidden = HabitManager.shared.habits.isEmpty
     }
     
     // MARK: - Actions
@@ -107,14 +107,14 @@ final class ShowAllViewController: UIViewController {
 // MARK: - UITableViewDelegate & UITableViewDataSource
 extension ShowAllViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return habits.count
+        return HabitManager.shared.habits.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TodayItemTableViewCell", for: indexPath) as? TodayItemTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(habit: habits[indexPath.row])
+        cell.configure(habit: HabitManager.shared.habits[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -124,12 +124,12 @@ extension ShowAllViewController: UITableViewDelegate, UITableViewDataSource {
 extension ShowAllViewController: TodayItemTableViewCellDelegate {
     func didToggleHabitCompletion(for cell: TodayItemTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        habits[indexPath.row].toggleCompletion()
+        HabitManager.shared.habits[indexPath.row].toggleCompletion()
         tableView.reloadRows(at: [indexPath], with: .automatic)
         
         // Update dashboard progress
-        let completedCount = habits.filter { $0.isCompleted }.count
-        let totalCount = habits.count
+        let completedCount = HabitManager.shared.habits.filter { $0.isCompleted }.count
+        let totalCount = HabitManager.shared.habits.count
         let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
         NotificationCenter.default.post(name: NSNotification.Name("UpdateProgress"), object: progress)
     }

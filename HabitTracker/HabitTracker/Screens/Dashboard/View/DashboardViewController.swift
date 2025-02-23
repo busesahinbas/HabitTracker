@@ -77,6 +77,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
+            cell.configure()
             return cell
         default:
             return UITableViewCell()
@@ -102,8 +103,8 @@ extension DashboardViewController: TodayTableViewCellDelegate {
     }
     
     private func updateProgress() {
-        let completedCount = habits.filter { $0.isCompleted }.count
-        let totalCount = habits.count
+        let completedCount = HabitManager.shared.habits.filter { $0.isCompleted }.count
+        let totalCount = HabitManager.shared.habits.count
         let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
         
         progressCell?.configure(progress: progress)

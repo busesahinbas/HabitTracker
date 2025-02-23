@@ -74,7 +74,7 @@ class CreateViewController: UIViewController {
             frequencyType: frequencyType
         )
         
-        habits.append(habit)
+        HabitManager.shared.addHabit(habit)
         
         // Show success message
         let banner = UIAlertController(title: "Success! 🎉", 
