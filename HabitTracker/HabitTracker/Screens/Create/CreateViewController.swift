@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol CreateViewControllerDelegate: AnyObject {
-    func didCreateHabit(_ habit: Habit)
-}
-
 class CreateViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet private weak var titleLabel: UILabel!
@@ -20,9 +16,6 @@ class CreateViewController: UIViewController {
     @IBOutlet private weak var typeSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var createButton: UIButton!
     @IBOutlet private weak var containerView: UIView!
-    
-    // MARK: - Properties
-    weak var delegate: CreateViewControllerDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -82,8 +75,15 @@ class CreateViewController: UIViewController {
         )
         
         habits.append(habit)
-        delegate?.didCreateHabit(habit)
-        navigationController?.popViewController(animated: true)
+        
+        // Show success message
+        let banner = UIAlertController(title: "Success! 🎉", 
+                                     message: "Your new habit '\(habit.name)' has been created!", 
+                                     preferredStyle: .alert)
+        banner.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        })
+        present(banner, animated: true)
     }
     
     private func showAlert(message: String) {
