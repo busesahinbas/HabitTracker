@@ -18,7 +18,6 @@ final class TodayTableViewCell: UITableViewCell {
     //MARK: - IBOutlets
     @IBOutlet private(set) weak var tableView: UITableView!
     @IBOutlet private(set) weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private(set) weak var descriptionLabel: UILabel!
     
     //MARK: - Properties
     weak var delegate: TodayTableViewCellDelegate?
@@ -38,14 +37,15 @@ final class TodayTableViewCell: UITableViewCell {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "TodayItemTableViewCell", bundle: nil), forCellReuseIdentifier: "TodayItemTableViewCell")
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "EmptyTableViewCell")
         tableView.isScrollEnabled = false
         
         updateTableViewHeight()
     }
     
     private func updateTableViewHeight() {
-        let rowHeight: CGFloat = 66
-        let shownCellsCount = min(habits.count, 3)
+        let rowHeight: CGFloat = habits.isEmpty ? 150 : 66
+        let shownCellsCount = habits.isEmpty ? 1 : min(habits.count, 3)
         
         tableViewHeightConstraint.constant = CGFloat(shownCellsCount) * rowHeight
         
@@ -56,27 +56,6 @@ final class TodayTableViewCell: UITableViewCell {
         delegate?.didUpdateTableViewHeight()
     }
     
-    private func showEmptyState(show: Bool) {
-        if show {
-            descriptionLabel.text = "No habits yet! 🌱\nTap + to create your first habit"
-            descriptionLabel.isHidden = false
-            tableView.isHidden = true
-        } else {
-            descriptionLabel.isHidden = true
-            tableView.isHidden = false
-        }
-    }
-    
-    func configure(with habits: [Habit]) {
-        if habits.count > 0 {
-            showEmptyState(show: false)
-            updateTableViewHeight()
-            tableView.reloadData()
-        } else {
-            showEmptyState(show: true)
-        }
-    }
-    
     @IBAction func allButtonTapped(_ sender: Any) {
         delegate?.didTapShowAllButton()
     }
@@ -85,31 +64,48 @@ final class TodayTableViewCell: UITableViewCell {
 //MARK: - UITableViewDelegate & UITableViewDataSource
 extension TodayTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return habits.count
-    }
+           return habits.isEmpty ? 1 : habits.count
+       }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TodayItemTableViewCell", for: indexPath) as? TodayItemTableViewCell else {
-            return UITableViewCell()
+        if habits.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyTableViewCell", for: indexPath) as? EmptyTableViewCell else {
+                return UITableViewCell()
+            }
+            return cell
+        } else {
+            guard indexPath.row < habits.count, let cell = tableView.dequeueReusableCell(withIdentifier: "TodayItemTableViewCell", for: indexPath) as? TodayItemTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.delegate = self
+            cell.configure(habit: habits[indexPath.row])
+            return cell
         }
-        cell.delegate = self
-        cell.configure(habit: habits[indexPath.row])
-        return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard !habits.isEmpty, indexPath.row < habits.count else { return nil }
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
-            habits.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            guard let self = self else { return }
             
-            self?.updateTableViewHeight()
-            self?.updateProgress()
-            self?.delegate?.didTableViewCellDelete()
+            habits.remove(at: indexPath.row)
+            
+            tableView.performBatchUpdates({
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                if habits.isEmpty {
+                    tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+                }
+            }, completion: { _ in
+                self.updateTableViewHeight()
+                self.updateProgress()
+                self.delegate?.didTableViewCellDelete()
+            })
             
             completionHandler(true)
         }
         deleteAction.backgroundColor = .red
-
+        
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }

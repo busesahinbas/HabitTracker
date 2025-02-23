@@ -77,7 +77,6 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.configure(with: habits)
             return cell
         default:
             return UITableViewCell()
