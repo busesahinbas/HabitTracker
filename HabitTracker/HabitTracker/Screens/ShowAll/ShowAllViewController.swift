@@ -15,14 +15,19 @@ final class ShowAllViewController: UIViewController {
     @IBOutlet private(set) weak var emptyView: UIView!
     @IBOutlet private weak var emptyAnimationView: LottieAnimationView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
+       private var days: [Date] = []
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupTableView()
+        setupCollectionView()
         setupNavigationBar()
+        loadDays()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +66,23 @@ final class ShowAllViewController: UIViewController {
         tableView.register(UINib(nibName: "TodayItemTableViewCell", bundle: nil), 
                          forCellReuseIdentifier: "TodayItemTableViewCell")
         tableView.isScrollEnabled = true
+    }
+    
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 8
+        layout.itemSize = CGSize(width: 50, height: 50)
+        
+        collectionView.collectionViewLayout = layout
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: "CalendarCollectionViewCell")
+    }
+    
+    private func loadDays() {
+        days = CalendarManager.shared.getDaysForNextMonths(months: 3)
+        collectionView.reloadData()
     }
     
     private func setupEmptyState() {
@@ -110,5 +132,21 @@ extension ShowAllViewController: TodayItemTableViewCellDelegate {
         let totalCount = habits.count
         let progress = totalCount == 0 ? 0 : CGFloat(completedCount) / CGFloat(totalCount) * 100
         NotificationCenter.default.post(name: NSNotification.Name("UpdateProgress"), object: progress)
+    }
+}
+
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
+extension ShowAllViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return days.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as? CalendarCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let date = days[indexPath.item]
+        cell.configure(with: date, isSelected: true)
+        return cell
     }
 }
